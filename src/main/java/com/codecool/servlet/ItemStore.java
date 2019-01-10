@@ -39,12 +39,7 @@ public class ItemStore {
         return item.getName();
     }
 
-    public void addToCart(int index) {
-        int price = Integer.parseInt(getItemPriceByIdx(index));
-        Item addToCart = new Item(getItemNameByIdx(index), price);
-        items.add(addToCart);
-        System.out.printf("%s%n added to cart", addToCart.toString());
-    }
+
 
     public Item getItem(int nr) {
         Item item = items.get(nr);
@@ -55,5 +50,16 @@ public class ItemStore {
         Item toRemove = items.get(index);
         items.remove(toRemove);
         System.out.printf("%s%n removed from cart", toRemove.toString());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder cartContent = new StringBuilder();
+        for (Item item: items) {
+            String written = item.toString();
+            cartContent.append(written);
+            cartContent.append("\n");
+        }
+        return String.valueOf(cartContent);
     }
 }

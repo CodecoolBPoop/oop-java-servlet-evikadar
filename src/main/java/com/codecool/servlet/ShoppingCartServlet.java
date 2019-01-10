@@ -23,8 +23,9 @@ public class ShoppingCartServlet extends HttpServlet {
             cart.add(toAdd);
 
         } else if (req.getParameter("removeProductNr") != null) {
-            int prodNr = Integer.parseInt(req.getParameter("removeProductNr"));
-            cart.removeFromCart(prodNr);
+            int prodToRemove = Integer.parseInt(req.getParameter("removeProductNr"));
+            Item toRemove = allProducts.getItem(prodToRemove);
+            cart.remove(toRemove);
         }
 
         PrintWriter out = resp.getWriter();
@@ -55,5 +56,6 @@ public class ShoppingCartServlet extends HttpServlet {
                         "<button type='submit'>Check Shopping Cart</button>" +
                         "</form>" +
                         "</div>"
-        );    }
+        );
+    }
 }
