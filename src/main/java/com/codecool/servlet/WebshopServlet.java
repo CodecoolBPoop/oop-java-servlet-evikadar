@@ -13,7 +13,9 @@ import java.util.Map;
 
 @WebServlet(name = "webshopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 3)
 public class WebshopServlet extends HttpServlet {
-    private ItemStore itemStore = new ItemStore();
+    public static ItemStore itemStore = new ItemStore();
+    public static ItemStore cart = new ItemStore();
+
 
     @Override
     public void init() throws ServletException {
@@ -25,6 +27,13 @@ public class WebshopServlet extends HttpServlet {
         itemStore.add(new Item("Dance Workshop", 7500));
     }
 
+    public static ItemStore getAllProducts() {
+        return itemStore;
+    }
+
+    public static ItemStore getCart() {
+        return cart;
+    }
 
 
     @Override
@@ -37,24 +46,38 @@ public class WebshopServlet extends HttpServlet {
                 "<html>\n" +
                         "<head><title>" + title + "</title></head>\n" +
                         "<body>\n" +
-                        "<h1>" + intro +"</h1>" +
-                "<table>\n"
+                        "<h1>" + intro + "</h1>" +
+                        "<table>\n"
         );
 
-        for (int i=0; i<itemStore.getSize(); i++) {
+        for (int i = 0; i < itemStore.getSize(); i++) {
             out.println(
                     "<tr\n>" +
-                            "<td>" + itemStore.getItemNameByIdx(i)  + "</td>" +
-                            "<td>" + itemStore.getItemPriceByIdx(i)  + "</td>"
-
+                            "<td>" + itemStore.getItemNameByIdx(i) + "</td>" +
+                            "<td>" + itemStore.getItemPriceByIdx(i) + " HUF </td>" +
+                            "<td>" +
+                            "<form action='cart' method='get'>" +
+                            "<button type='submit' name='addProductNr' value= " + i + ">Add</button>" +
+                            "</td>" +
+                            "<td>" +
+                            "<button type='submit' name='removeProductNr' value= " + i + ">Remove</button>" +
+                            "</form>" +
+                            "</td>" +
+                            "</tr\n>"
             );
         }
 
-
+        out.println(
+                "<div>" +
+                    "<form action = '/cart'>" +
+                        "<button type='submit'>Check Shopping Cart</button>" +
+                    "</form>" +
+                "</div>"
+        );
 
 
     }
 
 
-
 }
+

@@ -31,4 +31,9 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return name + ": " + price + " HUF";
+    }
 }
