@@ -29,9 +29,9 @@ public class ItemStore {
     }
 
 
-    public String getItemPriceByIdx(int index) {
+    public double getItemPriceByIdx(int index) {
         Item item = items.get(index);
-        return String.valueOf(item.getPrice());
+        return item.getPrice();
     }
 
     public String getItemNameByIdx (int index) {

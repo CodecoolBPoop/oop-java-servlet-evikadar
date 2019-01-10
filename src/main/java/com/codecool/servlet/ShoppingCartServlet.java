@@ -40,7 +40,10 @@ public class ShoppingCartServlet extends HttpServlet {
                         "<table>\n"
         );
 
+        double total = 0;
+
         for (int i = 0; i < cart.getSize(); i++) {
+            total += cart.getItemPriceByIdx(i);
             out.println(
                     "<tr\n>" +
                             "<td>" + cart.getItemNameByIdx(i) + "</td>" +
@@ -52,10 +55,16 @@ public class ShoppingCartServlet extends HttpServlet {
 
         out.println(
                 "<div>" +
-                        "<form action = '/cart'>" +
-                        "<button type='submit'>Check Shopping Cart</button>" +
-                        "</form>" +
+                        "<table>" +
+                        "<tr>" +
+                        "</tr>" +
+                        "<td>Total:</td>" +
+                        "<td>" + total +
+                        " HUF</td>" +
+                        "</table>" +
                         "</div>"
         );
     }
+
+
 }
